@@ -1,4 +1,4 @@
-package crypto
+package hash
 
 type CryptoProvider interface {
 	Hash(plain string) (string, error)
