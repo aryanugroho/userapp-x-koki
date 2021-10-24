@@ -14,7 +14,7 @@ var (
 	ErrInternal           = errors.New("internal error")
 )
 
-func (app *UserApp) Login(ctx context.Context, request LoginRequest) (*Authenticated, error) {
+func (app *UserApp) Login(ctx context.Context, request LoginDTO) (*Authenticated, error) {
 	// validate
 	err := request.validate()
 	if err != nil {
@@ -58,10 +58,10 @@ func (app *UserApp) Login(ctx context.Context, request LoginRequest) (*Authentic
 	}, nil
 }
 
-func (app *UserApp) Logout(ctx context.Context, request LogoutRequest) error {
+func (app *UserApp) Logout(ctx context.Context, request LogoutDTO) error {
 	return nil
 }
 
-func (app *UserApp) RefreshToken(ctx context.Context, request RefreshRequest) (*Authenticated, error) {
+func (app *UserApp) RefreshToken(ctx context.Context, request RefreshDTO) (*Authenticated, error) {
 	return nil, nil
 }

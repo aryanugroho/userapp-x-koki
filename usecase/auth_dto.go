@@ -2,12 +2,12 @@ package usecase
 
 import "errors"
 
-type LoginRequest struct {
+type LoginDTO struct {
 	PhoneNumber string `json:"phone_number"`
 	Password    string `json:"password"`
 }
 
-func (request *LoginRequest) validate() error {
+func (request *LoginDTO) validate() error {
 	if request.PhoneNumber == "" {
 		return errors.New("phone number is required")
 	}
@@ -24,11 +24,11 @@ type Authenticated struct {
 	RefreshToken string
 }
 
-type LogoutRequest struct {
+type LogoutDTO struct {
 	AccessToken string `json:"access_token"`
 }
 
-func (request *LogoutRequest) validate() error {
+func (request *LogoutDTO) validate() error {
 	if request.AccessToken == "" {
 		return errors.New("access token is required")
 	}
@@ -36,11 +36,11 @@ func (request *LogoutRequest) validate() error {
 	return nil
 }
 
-type RefreshRequest struct {
+type RefreshDTO struct {
 	RefreshToken string `json:"refresh_token"`
 }
 
-func (request *RefreshRequest) validate() error {
+func (request *RefreshDTO) validate() error {
 	if request.RefreshToken == "" {
 		return errors.New("refresh token is required")
 	}
