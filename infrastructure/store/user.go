@@ -96,3 +96,19 @@ func (s *UserMongoStore) CountAll(ctx context.Context, params map[string]interfa
 
 	return count, nil
 }
+
+func (s *UserMongoStore) Delete(ctx context.Context, id string) error {
+	oid, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		log.Error(ctx, "failed to Delete", err)
+		return err
+	}
+
+	_, err = s.user.DeleteOne(ctx, withParam("_id", oid))
+	if err != nil {
+		log.Error(ctx, "failed to Delete", err)
+		return err
+	}
+
+	return nil
+}
