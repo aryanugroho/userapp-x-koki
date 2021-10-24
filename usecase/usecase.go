@@ -14,9 +14,9 @@ type Application interface {
 	DeleteUser()
 	GetUsers()
 
-	Login(ctx context.Context, request LoginRequest) (*Authenticated, error)
-	Logout(ctx context.Context, request LogoutRequest) error
-	RefreshToken(ctx context.Context, request RefreshRequest) (*Authenticated, error)
+	Login(ctx context.Context, request LoginDTO) (*Authenticated, error)
+	Logout(ctx context.Context, request LogoutDTO) error
+	RefreshToken(ctx context.Context, request RefreshDTO) (*Authenticated, error)
 }
 
 type UserApp struct {
