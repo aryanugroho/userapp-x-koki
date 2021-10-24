@@ -17,4 +17,5 @@ type UserStore interface {
 	GetAll(ctx context.Context, params map[string]interface{}, pageNum, size int) ([]*domain.User, error)
 	CountAll(ctx context.Context, params map[string]interface{}) (int64, error)
 	Delete(ctx context.Context, id string) error
+	FindByPhoneNumber(ctx context.Context, phoneNumber string) (*domain.User, error)
 }

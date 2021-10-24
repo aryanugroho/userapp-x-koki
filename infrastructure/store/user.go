@@ -112,3 +112,14 @@ func (s *UserMongoStore) Delete(ctx context.Context, id string) error {
 
 	return nil
 }
+
+func (s *UserMongoStore) FindByPhoneNumber(ctx context.Context, phoneNumber string) (*domain.User, error) {
+	var user domain.User
+	res := s.user.FindOne(ctx, withParam("phone_number", phoneNumber))
+	err := res.Decode(&user)
+	if err != nil {
+		log.Error(ctx, "failed to FindByPhoneNumber", err)
+		return nil, err
+	}
+	return &user, nil
+}
