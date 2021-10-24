@@ -30,7 +30,7 @@ type TokenManager struct {
 // UserForToken is bridge for bussinessUser to authUser
 type UserForToken struct {
 	Email       string `json:"email"`
-	UserID      uint64 `json:"user_id"`
+	UserID      string `json:"user_id"`
 	PhoneNumber string `json:"phonenumber"`
 }
 
