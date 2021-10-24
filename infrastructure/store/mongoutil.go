@@ -36,7 +36,7 @@ func withPagination(pageNumber, pageSize int) *options.FindOptions {
 }
 
 func mapToParam(filter map[string]interface{}) (bson.D, error) {
-	if filter == nil || len(filter) == 0 {
+	if len(filter) == 0 {
 		return bson.D{}, nil
 	}
 
