@@ -4,15 +4,16 @@ import (
 	"context"
 
 	"github.com/aryanugroho/userapp-x-koki/common/jwt"
+	"github.com/aryanugroho/userapp-x-koki/domain"
 	"github.com/aryanugroho/userapp-x-koki/infrastructure"
 )
 
 type Application interface {
-	NewUser()
-	UpdateUser()
-	GetUser()
-	DeleteUser()
-	GetUsers()
+	NewUser(ctx context.Context, request *UserCreateDTO) (*domain.User, error)
+	UpdateUser(ctx context.Context, request *UserUpdateDTO) (*domain.User, error)
+	GetUser(ctx context.Context, id string) (*domain.User, error)
+	DeleteUser(ctx context.Context, id string) error
+	GetUsers(ctx context.Context, params map[string]interface{}, pageNum, size int) ([]*domain.User, error)
 
 	Login(ctx context.Context, request LoginDTO) (*Authenticated, error)
 	Logout(ctx context.Context, request LogoutDTO) error
@@ -20,6 +21,6 @@ type Application interface {
 }
 
 type UserApp struct {
-	store        infrastructure.Store
-	tokenManager jwt.TokenManager
+	Store        infrastructure.Store
+	TokenManager *jwt.TokenManager
 }
