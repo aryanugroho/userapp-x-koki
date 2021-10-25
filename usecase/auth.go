@@ -23,7 +23,7 @@ func (app *UserApp) Login(ctx context.Context, request LoginDTO) (*Authenticated
 	}
 
 	// lookup user by phone
-	user, err := app.store.User().FindByPhoneNumber(ctx, request.PhoneNumber)
+	user, err := app.Store.User().FindByPhoneNumber(ctx, request.PhoneNumber)
 	if err != nil {
 		log.Error(ctx, "failed to FindByPhoneNumber", err)
 		return nil, ErrInternal
@@ -41,12 +41,12 @@ func (app *UserApp) Login(ctx context.Context, request LoginDTO) (*Authenticated
 		UserID:      user.ID,
 		PhoneNumber: user.PhoneNumber,
 	}
-	accessToken, err := app.tokenManager.GenerateAccessToken(&tokenData)
+	accessToken, err := app.TokenManager.GenerateAccessToken(&tokenData)
 	if err != nil {
 		log.Error(ctx, "failed to GenerateAccessToken", err)
 		return nil, ErrInternal
 	}
-	refreshToken, err := app.tokenManager.GenerateRefreshToken(&tokenData)
+	refreshToken, err := app.TokenManager.GenerateRefreshToken(&tokenData)
 	if err != nil {
 		log.Error(ctx, "failed to GenerateRefreshToken", err)
 		return nil, ErrInternal
